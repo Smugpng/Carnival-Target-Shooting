@@ -6,23 +6,24 @@ using UnityEngine.Events;
 
 public class EnemyPoint : MonoBehaviour
 {
-    public delegate void OnDeath(float points);
-    public static event OnDeath onDeath;
+    public UnityEvent<int> onDeathEvent;
+    private GameManager gameManager;
 
     public float speed;
     public float size;
-    public int point;
-
+    
     [Header("Points I give")]
-    public float points;
+    public int point;
 
     public void OnDestroy()
     {
-        onDeath?.Invoke(points);
+        onDeathEvent?.Invoke(point);
     }
 
     private void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
+        onDeathEvent.AddListener(gameManager.UpdatePoints);
         Invoke("OnDestroy", 5);
     }
 }

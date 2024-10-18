@@ -21,7 +21,7 @@ public class EnemyBuilder : MonoBehaviour
 
     void MakeEnemy()
     {
-        speedVal = Random.Range(0, 2);
+        //speedVal = Random.Range(0, 2);  
         GameObject newEnemy = Instantiate(enemyPrefab);
         newEnemy.GetComponent<EnemyPoint>().speed = speed;
     }

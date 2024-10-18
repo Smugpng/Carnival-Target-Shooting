@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private static float Points;
+    public int Points { get; private set; }
 
     private void OnEnable()
     {
-        EnemyPoint.onDeath += UpdatePoints;
+        
     }
 
-    public void UpdatePoints(float pointsGained)
+    public void UpdatePoints(int pointsGained)
     {
         Points += pointsGained;
+        Debug.Log(Points);
     }
 }
