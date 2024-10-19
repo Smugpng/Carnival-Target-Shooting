@@ -21,11 +21,11 @@ public class EnemyBuilder : MonoBehaviour
     {
         for (int i = 0; i < enemyAmount; i++)
         {
-            MakeEnemy();
+            MakeEnemy(1);
         }
     }
 
-    void MakeEnemy()
+    public void MakeEnemy(int points)
     {
         GetValues();
         Vector3 spawnPosition = new Vector3(0, yPosition, 0);

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,6 +9,7 @@ public class EnemyPoint : MonoBehaviour
 {
     public UnityEvent<int> onDeathEvent;
     private GameManager gameManager;
+    private EnemyBuilder enemyBuilder;
 
     public float speed;
     public float size;
@@ -20,13 +22,15 @@ public class EnemyPoint : MonoBehaviour
     public void OnDestroy()
     {
         onDeathEvent?.Invoke(point);
+        Destroy(this.gameObject);
     }
 
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
         onDeathEvent.AddListener(gameManager.UpdatePoints);
-        Invoke("OnDestroy", 5);
+        enemyBuilder = FindObjectOfType<EnemyBuilder>();
+        onDeathEvent.AddListener(enemyBuilder.MakeEnemy);
     }
 
     private void Update()
@@ -44,5 +48,12 @@ public class EnemyPoint : MonoBehaviour
     {
         if (transform.position.x > horizontalScreenLimit || transform.position.x < -horizontalScreenLimit)
             direction *= -1;
+    }
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Bullet")
+        {
+            OnDestroy();
+        }
     }
 }
