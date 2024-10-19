@@ -18,8 +18,16 @@ public class Bullet : MonoBehaviour
         if (transform.position.y >= 10f)
         {
             rb.velocity = Vector3.zero;
-            transform.position = new Vector3(-10f, -.5f, 0f);
+            transform.position = new Vector3(-15f, -.5f, 0f);
             this.GetComponent<Bullet>().enabled = false;
         }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        rb.velocity = Vector3.zero;
+        transform.position = new Vector3(-15f, -.5f, 0f);
+        this.GetComponent<Bullet>().enabled = false;
+        //destory enemy object and call the ondeath event to increment points in gamemanager
     }
 }

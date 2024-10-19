@@ -11,8 +11,7 @@ public class Player : MonoBehaviour
     private Vector2 moveInput;
 
     private float moveSpeed = 6f;
-    private float horizontalScreenLimit = 10f;
-    private float verticalScreenLimit = 6f;
+    private float horizontalScreenLimit = 10.9f;
     private bool canShoot = true;
 
     void Start()
@@ -52,11 +51,6 @@ public class Player : MonoBehaviour
         if (transform.position.x > horizontalScreenLimit || transform.position.x <= -horizontalScreenLimit) //horizontal bounds checks
         {
             transform.position = new Vector3(transform.position.x * -1f, transform.position.y, 0);
-        }
-
-        else if (transform.position.y > verticalScreenLimit || transform.position.y <= -verticalScreenLimit) //vertical bounds checks
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y * -1, 0);
         }
     }
 

@@ -6,28 +6,34 @@ using UnityEngine;
 public class EnemyBuilder : MonoBehaviour
 {
     public GameObject enemyPrefab;
+    public int enemyAmount = 1;
     private float speed;
     private float size;
     private int point;
+    private float yPosition;
 
-    enum speedOptions {slow, medium, fast};
-    enum sizeOptions {average, medium, large};
-    enum pointOptions {small, medium, large};
+    enum speedOptions { slow, medium, fast };
+    enum sizeOptions { average, medium, large };
+    enum pointOptions { small, medium, large };
+    enum rowLevelOptions { top, mid, bot };
 
     void Start()
     {
-        MakeEnemy();
+        for (int i = 0; i < enemyAmount; i++)
+        {
+            MakeEnemy();
+        }
     }
 
     void MakeEnemy()
     {
         GetValues();
-        GameObject newEnemy = Instantiate(enemyPrefab);
+        Vector3 spawnPosition = new Vector3(0, yPosition, 0);
+        GameObject newEnemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
         newEnemy.GetComponent<EnemyPoint>().speed = speed;
         newEnemy.GetComponent<EnemyPoint>().size = size;
         newEnemy.GetComponent<EnemyPoint>().point = point;
-        Debug.Log("Building enemy with speed: " + speed + ", size: " + size + ", point: " + point);
-
+        Debug.Log("Building enemy with speed: " + speed + ", size: " + size + ", point: " + point + ", Y position: " + yPosition);
     }
 
     void GetValues()
@@ -35,6 +41,7 @@ public class EnemyBuilder : MonoBehaviour
         int speedNum = Random.Range(0, 3);
         int sizeNum = Random.Range(0, 3);
         int pointNum = Random.Range(0, 3);
+        int rowNum = Random.Range(0, 3);
 
         switch ((speedOptions)speedNum)
         {
@@ -72,6 +79,19 @@ public class EnemyBuilder : MonoBehaviour
                 break;
             case pointOptions.large:
                 point = 30;
+                break;
+        }
+
+        switch ((rowLevelOptions)rowNum)
+        {
+            case rowLevelOptions.top:
+                yPosition = 6f;
+                break;
+            case rowLevelOptions.mid:
+                yPosition = 4f;
+                break;
+            case rowLevelOptions.bot:
+                yPosition = 2f;
                 break;
         }
     }
