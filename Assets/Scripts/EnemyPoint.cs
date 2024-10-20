@@ -22,7 +22,6 @@ public class EnemyPoint : MonoBehaviour
     public void OnDestroy()
     {
         onDeathEvent?.Invoke(point);
-        Destroy(this.gameObject);
     }
 
     private void Start()
@@ -53,7 +52,7 @@ public class EnemyPoint : MonoBehaviour
     {
         if(other.tag == "Bullet")
         {
-            OnDestroy();
+            Destroy(this.gameObject);
         }
     }
 }

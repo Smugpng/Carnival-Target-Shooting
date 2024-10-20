@@ -6,11 +6,12 @@ using UnityEngine;
 public class EnemyBuilder : MonoBehaviour
 {
     public GameObject enemyPrefab;
-    public int enemyAmount = 1;
+    public int enemyAmount = 5;
     private float speed;
     private float size;
     private int point;
     private float yPosition;
+    private float horizontalScreenLimit = 10.5f;
 
     enum speedOptions { slow, medium, fast };
     enum sizeOptions { average, medium, large };
@@ -28,13 +29,15 @@ public class EnemyBuilder : MonoBehaviour
     public void MakeEnemy(int points)
     {
         GetValues();
-        Vector3 spawnPosition = new Vector3(0, yPosition, 0);
+        float randomX = Random.Range(-horizontalScreenLimit, horizontalScreenLimit);
+        Vector3 spawnPosition = new Vector3(randomX, yPosition, 0);
         GameObject newEnemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
         newEnemy.GetComponent<EnemyPoint>().speed = speed;
         newEnemy.GetComponent<EnemyPoint>().size = size;
         newEnemy.GetComponent<EnemyPoint>().point = point;
         Debug.Log("Building enemy with speed: " + speed + ", size: " + size + ", point: " + point + ", Y position: " + yPosition);
     }
+
 
     void GetValues()
     {

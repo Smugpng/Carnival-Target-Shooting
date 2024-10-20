@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
 
     void CheckIfInBounds()
     {
-        if (transform.position.x > horizontalScreenLimit || transform.position.x <= -horizontalScreenLimit) //horizontal bounds checks
+        if (transform.position.x > horizontalScreenLimit || transform.position.x <= -horizontalScreenLimit)
         {
             transform.position = new Vector3(transform.position.x * -1f, transform.position.y, 0);
         }
