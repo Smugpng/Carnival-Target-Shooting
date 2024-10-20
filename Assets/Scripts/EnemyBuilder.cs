@@ -32,6 +32,7 @@ public class EnemyBuilder : MonoBehaviour
         float randomX = Random.Range(-horizontalScreenLimit, horizontalScreenLimit);
         Vector3 spawnPosition = new Vector3(randomX, yPosition, 0);
         GameObject newEnemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        newEnemy.transform.localScale = Vector3.one * size;
         newEnemy.GetComponent<EnemyPoint>().speed = speed;
         newEnemy.GetComponent<EnemyPoint>().size = size;
         newEnemy.GetComponent<EnemyPoint>().point = point;
@@ -62,13 +63,13 @@ public class EnemyBuilder : MonoBehaviour
         switch ((sizeOptions)sizeNum)
         {
             case sizeOptions.average:
-                size = 1f;
+                size = 0.8f;
                 break;
             case sizeOptions.medium:
-                size = 1.5f;
+                size = 1f;
                 break;
             case sizeOptions.large:
-                size = 2f;
+                size = 1.3f;
                 break;
         }
 
