@@ -12,6 +12,7 @@ public class EnemyBuilder : MonoBehaviour
     private int point;
     private float yPosition;
     private float horizontalScreenLimit = 10.5f;
+    private Color color;
 
     enum speedOptions { slow, medium, fast };
     enum sizeOptions { average, medium, large };
@@ -36,6 +37,7 @@ public class EnemyBuilder : MonoBehaviour
         newEnemy.GetComponent<EnemyPoint>().speed = speed;
         newEnemy.GetComponent<EnemyPoint>().size = size;
         newEnemy.GetComponent<EnemyPoint>().point = point;
+        newEnemy.GetComponent<Renderer>().material.color = color;
         Debug.Log("Building enemy with speed: " + speed + ", size: " + size + ", point: " + point + ", Y position: " + yPosition);
     }
 
@@ -77,12 +79,15 @@ public class EnemyBuilder : MonoBehaviour
         {
             case pointOptions.small:
                 point = 10;
+                color = Color.red;
                 break;
             case pointOptions.medium:
                 point = 20;
+                color = Color.green;
                 break;
             case pointOptions.large:
                 point = 30;
+                color = Color.yellow;
                 break;
         }
 
