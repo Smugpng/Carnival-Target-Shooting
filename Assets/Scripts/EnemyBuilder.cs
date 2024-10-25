@@ -13,6 +13,7 @@ public class EnemyBuilder : MonoBehaviour
     private float yPosition;
     private float horizontalScreenLimit = 10.5f;
     private Color color;
+    private int enemyCounter = 0;
 
     enum speedOptions { slow, medium, fast };
     enum sizeOptions { average, medium, large };
@@ -38,6 +39,8 @@ public class EnemyBuilder : MonoBehaviour
         newEnemy.GetComponent<EnemyPoint>().size = size;
         newEnemy.GetComponent<EnemyPoint>().point = point;
         newEnemy.GetComponent<Renderer>().material.color = color;
+        newEnemy.name = "Enemy" + enemyCounter.ToString();
+        enemyCounter++;
         Debug.Log("Building enemy with speed: " + speed + ", size: " + size + ", point: " + point + ", Y position: " + yPosition);
     }
 
