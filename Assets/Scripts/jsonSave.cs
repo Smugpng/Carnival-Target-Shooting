@@ -8,7 +8,7 @@ public class jsonSave : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.P))
+        if (Input.GetKeyUp(KeyCode.O))
         {
             SaveLocations();
             Debug.Log("save stuff happening");
