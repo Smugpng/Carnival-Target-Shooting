@@ -7,7 +7,7 @@ public static class SaveSystem
     {
         BinaryFormatter formatter = new BinaryFormatter();
 
-        string path = Application.persistentDataPath + "/player.fun";
+        string path = Application.persistentDataPath + "/player.points";
         FileStream stream = new FileStream(path, FileMode.Create);
 
         PlayerData data = new PlayerData(gameManager);
@@ -17,7 +17,7 @@ public static class SaveSystem
     }
     public static PlayerData LoadStats()
     {
-        string path = Application.persistentDataPath + "/player.fun";
+        string path = Application.persistentDataPath + "/player.points";
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -25,7 +25,7 @@ public static class SaveSystem
 
             PlayerData data = formatter.Deserialize(stream) as PlayerData;
             stream.Close();
-
+            Debug.Log("Save File found at" + path);
             return data;
         }
         else

@@ -5,9 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerData
 {
-    public int points;
+    public int totalPoints;
     public PlayerData(GameManager gameManager)
     {
-        points += gameManager.Points;
+        totalPoints += gameManager.Points;
     }
 }
