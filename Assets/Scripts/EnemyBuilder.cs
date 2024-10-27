@@ -39,7 +39,8 @@ public class EnemyBuilder : MonoBehaviour
         newEnemy.GetComponent<EnemyPoint>().size = size;
         newEnemy.GetComponent<EnemyPoint>().point = point;
         newEnemy.GetComponent<Renderer>().material.color = color;
-        newEnemy.name = "Enemy" + enemyCounter.ToString();
+        newEnemy.name = GetEnemyNames();
+        
         enemyCounter++;
         Debug.Log("Building enemy with speed: " + speed + ", size: " + size + ", point: " + point + ", Y position: " + yPosition);
     }
@@ -106,5 +107,23 @@ public class EnemyBuilder : MonoBehaviour
                 yPosition = 2f;
                 break;
         }
+    }
+
+    string GetEnemyNames()
+    {
+        GameObject[] existingEnemies = GameObject.FindGameObjectsWithTag("Target");
+        HashSet<int> existingIndices = new HashSet<int>();
+
+        foreach (GameObject enemy in existingEnemies)
+        {
+            if (enemy.name.StartsWith("enemy") && int.TryParse(enemy.name.Substring(5), out int index))
+                existingIndices.Add(index);
+        }
+        int newIndex = 0;
+        while (existingIndices.Contains(newIndex))
+        {
+            newIndex++;
+        }
+        return "enemy" + newIndex;
     }
 }
